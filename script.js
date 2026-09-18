@@ -135,8 +135,14 @@ botao.addEventListener("click", function() {
     const volumeAreia = volumeArgamassa - (volumeCimento / 1000) - volumeAgua;
     console.log("Volume da areia:", volumeAreia);
 
+    const massaAreiaKg = volumeAreia * (valorMassaAreia * 1000)
+    console.log("Massa da areia:", massaAreiaKg)
+
     const volumeBrita = volumeAgregados - volumeAreia;
     console.log("Volume da brita:", volumeBrita)
+
+    const massaBritaKg = volumeBrita * (valorMassaBrita * 1000);
+    console.log("Massa da brita:", massaBritaKg)
     
         
     console.log(valorFck)
