@@ -34,8 +34,8 @@
                 type="number"
                 id="brita"
                 placeholder="Ex.: 19"
-                min="1"
-                step="1">
+                min=".95"
+                step="0.5">
 
             <label>Tipo de cimento</label>
             <select id="cimento">
@@ -88,6 +88,8 @@
                 step="0.1">
 
             <button id="calcular">Calcular Dosagem</button>
+            <h2>Resultado da Dosagem</h2>
+
             <p id="resultadoFCK"></p>
             <p id="resultadoAC"></p>
             <p id="resultadoCimento"></p>
@@ -99,6 +101,7 @@
             <p id="resultadoCimentoVolume"></p>
             <p id="resultadoAreiaVolume"></p>
             <p id="resultadoBritaVolume"></p>
+            <P id="resultadoAguaVolume"></P>
         </section>
 
         <script src="script.js"></script>

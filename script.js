@@ -1,5 +1,6 @@
-const botao = document.getElementById("calcular");
+// LIGAÇAO COM HTML //
 
+const botao = document.getElementById("calcular");
 const fck = document.getElementById("fck");
 const slump = document.getElementById("slump");
 const brita = document.getElementById("brita");
@@ -19,13 +20,19 @@ const resultadoTraco = document.getElementById("resultadoTraco");
 const resultadoCimentoVolume = document.getElementById("resultadoCimentoVolume");
 const resultadoAreiaVolume = document.getElementById("resultadoAreiaVolume");
 const resultadoBritaVolume = document.getElementById("resultadoBritaVolume");
+const resultadoAguaVolume = document.getElementById("resultadoAguaVolume");
 
+//  //
+
+// CURVA DE REFÊNCIA //
 const curvaReferencia = [
     { fck: 20, ac: 0.64, cimento: 295 },
     { fck: 30, ac: 0.53, cimento: 367 },
     { fck: 40, ac: 0.42, cimento: 488 },
 ];   
+//  //
 
+// FUNÇOES DE CALCULOS //
     function encontrarAc(fckInformado) {
         for (let i = 0; i < curvaReferencia.length - 1; i++) {
             const ponto1 = curvaReferencia[i];
@@ -58,14 +65,74 @@ const curvaReferencia = [
         }
         return null
     }
-
+//  //
 
 botao.addEventListener("click", function() {
+    
+// VALIDAÇÃO DAS INFORMAÇÕES//    
     const valorFck = Number(fck.value);
         if (fck.value === "") {
             alert("Por favor, preencha o fck.");
             return;
         }
+
+    if (slump.value === "") {
+        alert("Por favor, preencha o Slump.");
+        return;
+    }
+
+    if (brita.value === "") {
+        alert("Por favor, preencha a dimensão da brita.");
+        return;
+    }
+
+    const valorBrita = Number(brita.value);
+    if (valorBrita !== 9.5 &&
+        valorBrita !== 19 &&
+        valorBrita !== 25 &&
+        valorBrita !== 32 &&
+        valorBrita !== 38) {
+
+        alert("A dimensão da brita deve ser 9,5, 19, 25, 32 ou 38 mm.");
+        return;
+    }
+
+
+    if (cimento.value === "") {
+        alert("Por favor, preencha o cimento.");
+        return;
+    }
+
+    if (massaCimento.value === "") {
+        alert("Por favor, preencha a massa específica do cimento.");
+        return;
+    }
+
+    if (massaAreia.value === "") {
+        alert("Por favor, preencha a massa específica da areia.");
+        return;
+    }
+
+    if (massaBrita.value === "") {
+        alert("Por favor, preencha a massa específica da brita.");
+        return;
+    }
+
+    if (volume.value === "") {
+        alert("Por favor, preencha o volume.");
+        return;
+    }
+
+     if (teorArgamassa.value === "") {
+        alert("Por favor, preencha o teor de argamassa.");
+        return;
+    }
+
+//  //
+
+// CÁLCULO DA DOSAGEM //
+   
+    // RELAÇAO A/C, COM BASE FCK //
     resultadoFCK.textContent = "FCK informado: " + valorFck + "MPa";
     
     const valorRelacaoAc = encontrarAc(valorFck);
@@ -75,7 +142,9 @@ botao.addEventListener("click", function() {
         }
     resultadoAC.textContent = "Relação A/C: " + valorRelacaoAc.toFixed(3);
     console.log (valorRelacaoAc);
+    //  //
 
+    // CONSUMO CIMENTO //
     const valorCimentoKg = encontrarCimento(valorFck);
 
     console.log("A/C:", valorRelacaoAc)
@@ -83,14 +152,12 @@ botao.addEventListener("click", function() {
         resultadoCimento.textContent = "Cimento: " + valorCimentoKg.toFixed(2) + " kg/m³";
 
         const valorMassaCimento = Number(massaCimento.value);
-        if (massaCimento.value === "")  {
-            alert("Por favor, preencha a massa específica do cimento");
-            return;
-        }
 
         const volumeCimento = valorCimentoKg / valorMassaCimento;
         console.log("Volume do cimento:", volumeCimento);
+    // //
 
+    // CÁLCULO DA ÁGUA //
     const valorAgua = valorRelacaoAc * valorCimentoKg;
     console.log("Água:", valorAgua);
         resultadoAgua.textContent = "Água: " + valorAgua.toFixed(2) + " L/m³";
@@ -102,42 +169,27 @@ botao.addEventListener("click", function() {
 
         const volumeAgregados = 1 - volumeCimento / 1000 - volumeAgua;
         console.log("Volume dos agregados:", volumeAgregados);
+    //  //
 
-    const valorSlump = Number(slump.value);
-         if (slump.value === "") {
-            alert("Por favor, preencha o Slump.");
-            return;
-        }
-
-    const valorBrita = Number(brita.value);
-         if (brita.value === "") {
-            alert("Por favor, preencha a dimensão da brita.");
-            return;
-        }
+// CONVERSÃO DOS VALORES PARA NÚMERO //
 
     const valorCimento = cimento.value;
-         if (cimento.value === "") {
-            alert("Por favor, preencha o cimento.");
-            return;
-        }
     
     const valorMassaAreia = Number(massaAreia.value);
-        if (massaAreia.value === "") {
-            alert("Por favor, preencha a massa específica da areia.");
-            return;
-        }
-
+        
     const valorMassaBrita = Number(massaBrita.value);
-        if (massaBrita.value === "") {
-            alert("Por favor, preencha a massa específica da brita.");
-            return;
-        }
 
     const valorVolume = Number(volume.value);
-         if (volume.value === "") {
-            alert("Por favor, preencha o volume.");
-            return;
-        }
+
+    const valorTeorArgamassa = Number(teorArgamassa.value);
+
+// //
+
+    // QUANTIDADES DE ACORDO COM O VOLUME //
+    const aguaParaVolume = valorAgua * valorVolume;
+        resultadoAguaVolume.textContent =
+        "Água para " + valorVolume + " m³: " +
+        aguaParaVolume.toFixed(2) + " L";
 
     const cimentoParaVolume = valorCimentoKg * valorVolume;
     console.log("Cimento para o volume:", cimentoParaVolume);
@@ -145,13 +197,9 @@ botao.addEventListener("click", function() {
         "Cimento para " + valorVolume + " m³: " +
         cimentoParaVolume.toFixed(2) + " kg";
 
-    
-    const valorTeorArgamassa = Number(teorArgamassa.value);
-        if (teorArgamassa.value === "") {
-            alert("Por favor, preencha o teor de argamassa");
-            return;
-        }
+    // //
 
+    // CÁLCULO ARGAMASSA E AREIA //
     const volumeArgamassa = 1 * (valorTeorArgamassa / 100);
     console.log("Volume da argamassa:", volumeArgamassa);
 
@@ -172,6 +220,9 @@ botao.addEventListener("click", function() {
     console.log("Traço da areia:", tracoAreia);
     console.log("Traço da areia:", tracoAreia.toFixed(2));
 
+    // //
+
+    // CÁLCULO DA BRITA //
     const volumeBrita = volumeAgregados - volumeAreia;
     console.log("Volume da brita:", volumeBrita)
 
@@ -185,6 +236,9 @@ botao.addEventListener("click", function() {
         "Brita para " + valorVolume + " m³ :" +
         britaParaVolume.toFixed(2) + " kg";
 
+    //  //
+
+    // CÁLCULO DO TRAÇO //
     const tracoBrita = massaBritaKg / valorCimentoKg;
     console.log("Traço da brita:", tracoBrita);
     console.log("Traço da brita:", tracoBrita.toFixed(2))
@@ -196,10 +250,10 @@ botao.addEventListener("click", function() {
         tracoBrita.toFixed(2) +
         " : " + 
         tracoAgua.toFixed(3);
+    // //
     
-        
+    // VALORES INFORMADOS PELO USUARIO //
     console.log(valorFck)
-    console.log(valorSlump)
     console.log(valorBrita)
     console.log(valorCimento)
     console.log(valorMassaCimento)
@@ -207,5 +261,6 @@ botao.addEventListener("click", function() {
     console.log(valorMassaBrita)
     console.log(valorVolume)
     console.log(valorTeorArgamassa)
+    // //
     
 });
