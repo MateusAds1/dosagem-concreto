@@ -133,14 +133,14 @@ botao.addEventListener("click", function() {
 // CÁLCULO DA DOSAGEM //
    
     // RELAÇAO A/C, COM BASE FCK //
-    resultadoFCK.textContent = "FCK informado: " + valorFck + "MPa";
+    resultadoFCK.textContent = "FCK informado: " + valorFck + " MPa";
     
     const valorRelacaoAc = encontrarAc(valorFck);
         if (valorRelacaoAc === null) {
             alert ("O FCK informado está fora da curva de referência.");
             return;
         }
-    resultadoAC.textContent = "Relação A/C: " + valorRelacaoAc.toFixed(3);
+    resultadoAC.textContent = "Relação A/C: " + valorRelacaoAc.toFixed(3).replace(".", ",");
     console.log (valorRelacaoAc);
     //  //
 
@@ -149,7 +149,7 @@ botao.addEventListener("click", function() {
 
     console.log("A/C:", valorRelacaoAc)
     console.log("Cimento:", valorCimentoKg);
-        resultadoCimento.textContent = "Cimento: " + valorCimentoKg.toFixed(2) + " kg/m³";
+        resultadoCimento.textContent = "Cimento: " + valorCimentoKg.toFixed(2).replace(".", ",") + " kg/m³";
 
         const valorMassaCimento = Number(massaCimento.value);
 
@@ -160,7 +160,7 @@ botao.addEventListener("click", function() {
     // CÁLCULO DA ÁGUA //
     const valorAgua = valorRelacaoAc * valorCimentoKg;
     console.log("Água:", valorAgua);
-        resultadoAgua.textContent = "Água: " + valorAgua.toFixed(2) + " L/m³";
+        resultadoAgua.textContent = "Água: " + valorAgua.toFixed(2).replace(".", ",") + " L/m³";
         const tracoAgua = valorRelacaoAc;
         console.log("Traço da água:", tracoAgua.toFixed(3));
 
@@ -208,7 +208,7 @@ botao.addEventListener("click", function() {
 
     const massaAreiaKg = volumeAreia * (valorMassaAreia * 1000)
     console.log("Massa da areia:", massaAreiaKg)
-        resultadoAreia.textContent = "Areia: " + massaAreiaKg.toFixed(2) + " kg/m³";
+        resultadoAreia.textContent = "Areia: " + massaAreiaKg.toFixed(2).replace(".", ",") + " kg/m³";
 
     const areiaParaVolume = massaAreiaKg * valorVolume;
     console.log("Areia para o volume:", areiaParaVolume);
@@ -228,7 +228,7 @@ botao.addEventListener("click", function() {
 
     const massaBritaKg = volumeBrita * (valorMassaBrita * 1000);
     console.log("Massa da brita:", massaBritaKg)
-        resultadoBrita.textContent = "Brita: " + massaBritaKg.toFixed(2) + " kg/m³";
+        resultadoBrita.textContent = "Brita: " + massaBritaKg.toFixed(2).replace(".",",") + " kg/m³";
 
     const britaParaVolume = massaBritaKg * valorVolume;
     console.log("Brita para o volume:", britaParaVolume.toFixed(2));
@@ -245,11 +245,11 @@ botao.addEventListener("click", function() {
 
     resultadoTraco.textContent = 
         "Traço: 1 : " +
-        tracoAreia.toFixed(2) +
+        tracoAreia.toFixed(2).replace(".",",") +
         " : " + 
-        tracoBrita.toFixed(2) +
+        tracoBrita.toFixed(2).replace(".",",") +
         " : " + 
-        tracoAgua.toFixed(3);
+        tracoAgua.toFixed(3).replace(".",",");
     // //
     
     // VALORES INFORMADOS PELO USUARIO //
