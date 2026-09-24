@@ -8,6 +8,10 @@ const cimento = document.getElementById("cimento");
 const massaCimento = document.getElementById("massaCimento");
 const volume = document.getElementById("volume");
 const massaAreia = document.getElementById("massaAreia");
+const tipoAreia1 = document.getElementById("tipoAreia1");
+const porcentagemAreia1 = document.getElementById("porcentagemAreia1");
+const tipoAreia2 = document.getElementById("tipoAreia2");
+const porcentagemAreia2 = document.getElementById("porcentagemAreia2");
 const massaBrita = document.getElementById("massaBrita");
 const teorArgamassa = document.getElementById("teorArgamassa");
 const resultadoFCK = document.getElementById("resultadoFCK");
@@ -15,6 +19,8 @@ const resultadoAC = document.getElementById("resultadoAC");
 const resultadoCimento = document.getElementById("resultadoCimento");
 const resultadoAgua = document.getElementById("resultadoAgua");
 const resultadoAreia = document.getElementById("resultadoAreia");
+const resultadoAreia1 = document.getElementById("resultadoAreia1");
+const resultadoAreia2 = document.getElementById("resultadoAreia2");
 const resultadoBrita = document.getElementById("resultadoBrita");
 const resultadoTraco = document.getElementById("resultadoTraco");
 const resultadoCimentoVolume = document.getElementById("resultadoCimentoVolume");
@@ -128,6 +134,19 @@ botao.addEventListener("click", function() {
         return;
     }
 
+    if (porcentagemAreia1.value === "" || porcentagemAreia2.value === "") {
+        alert("Por favor, informe as porcentagens das areias.");
+        return;
+    }
+
+    const valorPorcentagemAreia1 = Number(porcentagemAreia1.value);
+    const valorPorcentagemAreia2 = Number(porcentagemAreia2.value);
+
+    if (valorPorcentagemAreia1 + valorPorcentagemAreia2 !== 100) {
+        alert("A porcentagem das areias deve totalizar 100%.");
+        return;
+    }
+
 //  //
 
 // CÁLCULO DA DOSAGEM //
@@ -147,8 +166,20 @@ botao.addEventListener("click", function() {
     // CONSUMO CIMENTO //
     const valorCimentoKg = encontrarCimento(valorFck);
 
+    const valorTeorArgamassa = Number(teorArgamassa.value) / 100;
+
     console.log("A/C:", valorRelacaoAc)
     console.log("Cimento:", valorCimentoKg);
+
+        const valorM = (2400 / valorCimentoKg) - 1 - valorRelacaoAc;
+        console.log("m:", valorM)
+
+        const valorA = valorTeorArgamassa * (1 + valorM) - 1
+        console.log("a (areia):", valorA);
+
+        const valorB = valorM - valorA;
+        console.log("b (brita):", valorB)
+
         resultadoCimento.textContent = "Cimento: " + valorCimentoKg.toFixed(2).replace(".", ",") + " kg/m³";
 
         const valorMassaCimento = Number(massaCimento.value);
@@ -174,16 +205,19 @@ botao.addEventListener("click", function() {
 // CONVERSÃO DOS VALORES PARA NÚMERO //
 
     const valorCimento = cimento.value;
-    
     const valorMassaAreia = Number(massaAreia.value);
-        
     const valorMassaBrita = Number(massaBrita.value);
-
     const valorVolume = Number(volume.value);
-
-    const valorTeorArgamassa = Number(teorArgamassa.value);
+    const percentualAreia1 = valorPorcentagemAreia1 / 100;
+    const percentualAreia2 = valorPorcentagemAreia2 / 100;
 
 // //
+
+// CALCULOS AREIAS //
+       
+
+
+//   //
 
     // QUANTIDADES DE ACORDO COM O VOLUME //
     const aguaParaVolume = valorAgua * valorVolume;
@@ -199,34 +233,41 @@ botao.addEventListener("click", function() {
 
     // //
 
-    // CÁLCULO ARGAMASSA E AREIA //
-    const volumeArgamassa = 1 * (valorTeorArgamassa / 100);
-    console.log("Volume da argamassa:", volumeArgamassa);
-
-    const volumeAreia = volumeArgamassa - (volumeCimento / 1000) - volumeAgua;
-    console.log("Volume da areia:", volumeAreia);
-
-    const massaAreiaKg = volumeAreia * (valorMassaAreia * 1000)
-    console.log("Massa da areia:", massaAreiaKg)
-        resultadoAreia.textContent = "Areia: " + massaAreiaKg.toFixed(2).replace(".", ",") + " kg/m³";
+    // CÁLCULO AREIA //
+    const massaAreiaKg = valorA * valorCimentoKg;
+        console.log("Massa da areia:",massaAreiaKg);
+        resultadoAreia.textContent =
+        "Areia: " +
+        massaAreiaKg.toFixed(2).replace(".", ",") +
+        " kg/m³";
 
     const areiaParaVolume = massaAreiaKg * valorVolume;
     console.log("Areia para o volume:", areiaParaVolume);
         resultadoAreiaVolume.textContent = 
-        "Areia para " + valorVolume + " m³ : " +
+        "Areia para " + valorVolume + " m³: " +
         areiaParaVolume.toFixed(2) + " kg";
 
-    const tracoAreia = massaAreiaKg / valorCimentoKg;
-    console.log("Traço da areia:", tracoAreia);
-    console.log("Traço da areia:", tracoAreia.toFixed(2));
+    const massaAreia1Kg = massaAreiaKg * percentualAreia1;
+    console.log("Massa da areia 1:", massaAreia1Kg);
+        resultadoAreia1.textContent =
+        tipoAreia1.value + ": " +
+        massaAreia1Kg.toFixed(2).replace(".", ",") 
 
+    resultadoAreia1.textContent = 
+    tipoAreia1.value + ": " +
+    massaAreia1Kg.toFixed(2).replace(".", ",") +
+    " kg/m³";
+
+    const massaAreia2Kg = massaAreiaKg * percentualAreia2
+    console.log("Massa da areia 2:", massaAreia2Kg)
+        resultadoAreia2.textContent = 
+        tipoAreia2.value + ": " +
+        massaAreia2Kg.toFixed(2).replace(".", ",") +
+        " kg/m³";
     // //
 
     // CÁLCULO DA BRITA //
-    const volumeBrita = volumeAgregados - volumeAreia;
-    console.log("Volume da brita:", volumeBrita)
-
-    const massaBritaKg = volumeBrita * (valorMassaBrita * 1000);
+    const massaBritaKg = valorB * valorCimentoKg;
     console.log("Massa da brita:", massaBritaKg)
         resultadoBrita.textContent = "Brita: " + massaBritaKg.toFixed(2).replace(".",",") + " kg/m³";
 
@@ -245,7 +286,7 @@ botao.addEventListener("click", function() {
 
     resultadoTraco.textContent = 
         "Traço: 1 : " +
-        tracoAreia.toFixed(2).replace(".",",") +
+        valorA.toFixed(2).replace(".",",") +
         " : " + 
         tracoBrita.toFixed(2).replace(".",",") +
         " : " + 
