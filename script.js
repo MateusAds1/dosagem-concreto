@@ -14,18 +14,27 @@ const tipoAreia2 = document.getElementById("tipoAreia2");
 const porcentagemAreia2 = document.getElementById("porcentagemAreia2");
 const massaBrita = document.getElementById("massaBrita");
 const teorArgamassa = document.getElementById("teorArgamassa");
+const tipoBrita1 = document.getElementById("tipoBrita1");
+const porcentagemBrita1 = document.getElementById("porcentagemBrita1");
+const tipoBrita2 = document.getElementById("tipoBrita2");
+const porcentagemBrita2 = document.getElementById("porcentagemBrita2");
 const resultadoFCK = document.getElementById("resultadoFCK");
 const resultadoAC = document.getElementById("resultadoAC");
 const resultadoCimento = document.getElementById("resultadoCimento");
 const resultadoAgua = document.getElementById("resultadoAgua");
 const resultadoAreia = document.getElementById("resultadoAreia");
-const resultadoAreia1 = document.getElementById("resultadoAreia1");
+const resultadoAreia1Volume = document.getElementById("resultadoAreia1Volume");
+const resultadoAreia2Volume = document.getElementById("resultadoAreia2Volume");
 const resultadoAreia2 = document.getElementById("resultadoAreia2");
 const resultadoBrita = document.getElementById("resultadoBrita");
+const resultadoBrita1 = document.getElementById("resultadoBrita1");
+const resultadoBrita2 = document.getElementById("resultadoBrita2");
 const resultadoTraco = document.getElementById("resultadoTraco");
 const resultadoCimentoVolume = document.getElementById("resultadoCimentoVolume");
 const resultadoAreiaVolume = document.getElementById("resultadoAreiaVolume");
 const resultadoBritaVolume = document.getElementById("resultadoBritaVolume");
+const resultadoBrita1Volume = document.getElementById("resultadoBrita1Volume");
+const resultadoBrita2Volume = document.getElementById("resultadoBrita2Volume");
 const resultadoAguaVolume = document.getElementById("resultadoAguaVolume");
 
 //  //
@@ -147,6 +156,18 @@ botao.addEventListener("click", function() {
         return;
     }
 
+     if (porcentagemBrita1.value === "" || porcentagemBrita2.value === "") {
+        alert("Por favor, informe as porcentagens das Britas.");
+        return;
+    }
+
+    const valorPorcentagemBrita1 = Number(porcentagemBrita1.value);
+    const valorPorcentagemBrita2 = Number(porcentagemBrita2.value);
+
+    if (valorPorcentagemBrita1 + valorPorcentagemBrita2 !== 100) {
+        alert("A porcentagem das britas deve totalizar 100%.");
+        return;
+    }
 //  //
 
 // CÁLCULO DA DOSAGEM //
@@ -264,6 +285,16 @@ botao.addEventListener("click", function() {
         tipoAreia2.value + ": " +
         massaAreia2Kg.toFixed(2).replace(".", ",") +
         " kg/m³";
+
+    const areia1ParaVolume = massaAreia1Kg * valorVolume;
+    const areia2ParaVolume = massaAreia2Kg * valorVolume;
+
+    resultadoAreia1Volume.textContent = tipoAreia1.value + " para " + valorVolume + " m³: " +
+    areia1ParaVolume.toFixed(2).replace(".", ",") + (" kg")
+
+    resultadoAreia2Volume.textContent = tipoAreia2.value + " para " + valorVolume + " m³: " +
+    areia2ParaVolume.toFixed(2).replace(".", ",") + (" kg")
+
     // //
 
     // CÁLCULO DA BRITA //
@@ -271,11 +302,35 @@ botao.addEventListener("click", function() {
     console.log("Massa da brita:", massaBritaKg)
         resultadoBrita.textContent = "Brita: " + massaBritaKg.toFixed(2).replace(".",",") + " kg/m³";
 
+    const percentualBrita1 = valorPorcentagemBrita1 / 100;
+    const percentualBrita2 = valorPorcentagemBrita2 / 100;
+
+    const massaBrita1kg = massaBritaKg * percentualBrita1;
+    const massaBrita2kg = massaBritaKg * percentualBrita2;
+
+    console.log("Massa da brita 1:", massaBrita1kg);
+    console.log("Massa da brita 2:", massaBrita2kg);
+
+    resultadoBrita1.textContent = tipoBrita1.value + ": " +
+    massaBrita1kg.toFixed(2).replace(".", ",") + " kg/m³"
+    
+    resultadoBrita2.textContent = tipoBrita2.value + ": " +
+    massaBrita2kg.toFixed(2).replace(".", ",") + " kg/m³"
+        
     const britaParaVolume = massaBritaKg * valorVolume;
     console.log("Brita para o volume:", britaParaVolume.toFixed(2));
         resultadoBritaVolume.textContent =
-        "Brita para " + valorVolume + " m³ :" +
+        "Brita para " + valorVolume + " m³: " +
         britaParaVolume.toFixed(2) + " kg";
+
+    const brita1ParaVolume = massaBrita1kg * valorVolume;
+    const brita2ParaVolume = massaBrita2kg * valorVolume;
+
+    resultadoBrita1Volume.textContent = tipoBrita1.value + " para " + valorVolume + " m³: " +
+    brita1ParaVolume.toFixed(2).replace(".", ",") + " kg";
+
+    resultadoBrita2Volume.textContent = tipoBrita2.value + " para " + valorVolume + " m³: " +
+    brita2ParaVolume.toFixed(2).replace(".", ",") + " kg";
 
     //  //
 

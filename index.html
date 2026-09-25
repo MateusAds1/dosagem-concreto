@@ -109,6 +109,36 @@
                 min="1"
                 step="0.01"> 
 
+            <label>Tipo de brita 1</label>
+                <input
+                type="text"
+                id="tipoBrita1"
+                placeholder="Ex.: Brita 1">
+
+            <label>Porcentagem da brita 1 (%)</label>
+            <input
+                type="number"
+                id="porcentagemBrita1"
+                placeholder="Ex.: 60"
+                min="0"
+                max="100"
+                step="1"> 
+
+            <label>Tipo de brita 2</label>
+                <input
+                type="text"
+                id="tipoBrita2"
+                placeholder="Ex.: Brita 2">
+               
+            <label>Porcentagem da brita 2 (%)</label>
+            <input
+                type="number"
+                id="porcentagemBrita2"
+                placeholder="Ex.: 40"
+                min="0"
+                max="100"
+                step="1"> 
+
             <label>Volume de concreto (m³)</label>
             <input
                 type="number"
@@ -118,24 +148,46 @@
                 step="0.1">
 
             <button id="calcular">Calcular Dosagem</button>
+
             <h2>Resultado da Dosagem</h2>
+
             <h2>Dosagem para 1 m³</h2>
 
+            <h2>Dados Principais</h2>
             <p id="resultadoFCK"></p>
             <p id="resultadoAC"></p>
             <p id="resultadoCimento"></p>
             <p id="resultadoAgua"></p>
+
+            <h3>Areias</h3>
             <p id="resultadoAreia"></p>
             <p id="resultadoAreia1"></p>
             <p id="resultadoAreia2"></p>
+
+            <h3>Britas</h3>
             <p id="resultadoBrita"></p>
+            <p id="resultadoBrita1"></p>
+            <p id="resultadoBrita2"></p>
+
+            <h3>Traço</h3>
             <p id="resultadoTraco"></p>
 
             <h3>Quantidade para o volume informado</h3>
 
+            <h3>Cimento</h3>
             <p id="resultadoCimentoVolume"></p>
+
+            <h3>Areias</h3>
             <p id="resultadoAreiaVolume"></p>
+            <p id="resultadoAreia1Volume"></p>
+            <p id="resultadoAreia2Volume"></p>
+
+            <h3>Britas</h3>
             <p id="resultadoBritaVolume"></p>
+            <p id="resultadoBrita1Volume"></p>
+            <p id="resultadoBrita2Volume"></p>
+
+            <h3>Água</h3>
             <P id="resultadoAguaVolume"></P>
         </section>
 
