@@ -244,13 +244,13 @@ botao.addEventListener("click", function() {
     const aguaParaVolume = valorAgua * valorVolume;
         resultadoAguaVolume.textContent =
         "Água para " + valorVolume + " m³: " +
-        aguaParaVolume.toFixed(2) + " L";
+        aguaParaVolume.toFixed(2).replace(".", ",") + " L";
 
     const cimentoParaVolume = valorCimentoKg * valorVolume;
     console.log("Cimento para o volume:", cimentoParaVolume);
         resultadoCimentoVolume.textContent = 
         "Cimento para " + valorVolume + " m³: " +
-        cimentoParaVolume.toFixed(2) + " kg";
+        cimentoParaVolume.toFixed(2).replace(".", ",") + " kg";
 
     // //
 
@@ -266,7 +266,7 @@ botao.addEventListener("click", function() {
     console.log("Areia para o volume:", areiaParaVolume);
         resultadoAreiaVolume.textContent = 
         "Areia para " + valorVolume + " m³: " +
-        areiaParaVolume.toFixed(2) + " kg";
+        areiaParaVolume.toFixed(2).replace(".", ",") + " kg";
 
     const massaAreia1Kg = massaAreiaKg * percentualAreia1;
     console.log("Massa da areia 1:", massaAreia1Kg);
@@ -321,7 +321,7 @@ botao.addEventListener("click", function() {
     console.log("Brita para o volume:", britaParaVolume.toFixed(2));
         resultadoBritaVolume.textContent =
         "Brita para " + valorVolume + " m³: " +
-        britaParaVolume.toFixed(2) + " kg";
+        britaParaVolume.toFixed(2).replace(".", ",") + " kg";
 
     const brita1ParaVolume = massaBrita1kg * valorVolume;
     const brita2ParaVolume = massaBrita2kg * valorVolume;
