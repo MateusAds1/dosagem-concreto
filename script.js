@@ -258,7 +258,7 @@ botao.addEventListener("click", function() {
     const massaAreiaKg = valorA * valorCimentoKg;
         console.log("Massa da areia:",massaAreiaKg);
         resultadoAreia.textContent =
-        "Areia: " +
+        "Total de Areia: " +
         massaAreiaKg.toFixed(2).replace(".", ",") +
         " kg/m³";
 
@@ -300,7 +300,7 @@ botao.addEventListener("click", function() {
     // CÁLCULO DA BRITA //
     const massaBritaKg = valorB * valorCimentoKg;
     console.log("Massa da brita:", massaBritaKg)
-        resultadoBrita.textContent = "Brita: " + massaBritaKg.toFixed(2).replace(".",",") + " kg/m³";
+        resultadoBrita.textContent = "Total de Brita: " + massaBritaKg.toFixed(2).replace(".",",") + " kg/m³";
 
     const percentualBrita1 = valorPorcentagemBrita1 / 100;
     const percentualBrita2 = valorPorcentagemBrita2 / 100;

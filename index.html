@@ -53,16 +53,6 @@
                 min="1"
                 step="0.01">
 
-            <label>Teor de argamassa (%)</label>
-            <input
-                type="number"
-                id="teorArgamassa"
-                placeholder="Ex.: 52"
-                min="1"
-                max="100"
-                step="1">
-
-
             <label>Massa específica da areia(g/cm³)</label>
             <input
                 type="number"
@@ -147,12 +137,22 @@
                 min="0.1"
                 step="0.1">
 
+            <label>Teor de argamassa (%)</label>
+            <input
+                type="number"
+                id="teorArgamassa"
+                placeholder="Ex.: 52"
+                min="1"
+                max="100"
+                step="1">
+
             <button id="calcular">Calcular Dosagem</button>
 
             <h2>Resultado da Dosagem</h2>
-
+            
             <h2>Dosagem para 1 m³</h2>
 
+        <section>
             <h2>Dados Principais</h2>
             <p id="resultadoFCK"></p>
             <p id="resultadoAC"></p>
@@ -171,9 +171,11 @@
 
             <h3>Traço</h3>
             <p id="resultadoTraco"></p>
+        </section>
 
-            <h3>Quantidade para o volume informado</h3>
+            <h2>Quantidade para o volume informado</h2>
 
+        <section>
             <h3>Cimento</h3>
             <p id="resultadoCimentoVolume"></p>
 
@@ -189,6 +191,7 @@
 
             <h3>Água</h3>
             <P id="resultadoAguaVolume"></P>
+        </section>
         </section>
 
         <script src="script.js"></script>
