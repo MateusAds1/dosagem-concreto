@@ -23,7 +23,6 @@ const resultadoAC = document.getElementById("resultadoAC");
 const resultadoCimento = document.getElementById("resultadoCimento");
 const resultadoAgua = document.getElementById("resultadoAgua");
 const resultadoAreia = document.getElementById("resultadoAreia");
-const resultadoAreia1 = document.getElementById("resultadoAreia1")
 const resultadoAreia1Volume = document.getElementById("resultadoAreia1Volume");
 const resultadoAreia2Volume = document.getElementById("resultadoAreia2Volume");
 const resultadoAreia2 = document.getElementById("resultadoAreia2");
@@ -86,15 +85,10 @@ const curvaReferencia = [
 botao.addEventListener("click", function() {
     
 // VALIDAÇÃO DAS INFORMAÇÕES//    
+    const valorFck = Number(fck.value);
         if (fck.value === "") {
             alert("Por favor, preencha o fck.");
             return;
-        }
-    const valorFck = Number(fck.value);
-
-        if (valorFck < 20 || valorFck > 40) {
-            alert("O fck deve estar entre 20 e 40 MPa");
-            return
         }
 
     if (slump.value === "") {
@@ -157,7 +151,7 @@ botao.addEventListener("click", function() {
     const valorPorcentagemAreia1 = Number(porcentagemAreia1.value);
     const valorPorcentagemAreia2 = Number(porcentagemAreia2.value);
 
-    if (Math.abs(valorPorcentagemAreia1 + valorPorcentagemAreia2 - 100) > 0.01) {
+    if (valorPorcentagemAreia1 + valorPorcentagemAreia2 !== 100) {
         alert("A porcentagem das areias deve totalizar 100%.");
         return;
     }
@@ -170,7 +164,7 @@ botao.addEventListener("click", function() {
     const valorPorcentagemBrita1 = Number(porcentagemBrita1.value);
     const valorPorcentagemBrita2 = Number(porcentagemBrita2.value);
 
-    if (Math.abs(valorPorcentagemBrita1 + valorPorcentagemBrita2 - 100) > 0.01) {
+    if (valorPorcentagemBrita1 + valorPorcentagemBrita2 !== 100) {
         alert("A porcentagem das britas deve totalizar 100%.");
         return;
     }
@@ -178,13 +172,14 @@ botao.addEventListener("click", function() {
 
 // CÁLCULO DA DOSAGEM //
    
-    // RELAÇAO A/C, COM BASE FCK //    
+    // RELAÇAO A/C, COM BASE FCK //
+    resultadoFCK.textContent = "FCK informado: " + valorFck + " MPa";
+    
     const valorRelacaoAc = encontrarAc(valorFck);
         if (valorRelacaoAc === null) {
             alert ("O FCK informado está fora da curva de referência.");
             return;
         }
-    resultadoFCK.textContent = "FCK informado: " + valorFck + " MPa";
     resultadoAC.textContent = "Relação A/C: " + valorRelacaoAc.toFixed(3).replace(".", ",");
     console.log (valorRelacaoAc);
     //  //
@@ -205,11 +200,6 @@ botao.addEventListener("click", function() {
 
         const valorB = valorM - valorA;
         console.log("b (brita):", valorB)
-
-        if (valorA < 0 || valorB < 0) {
-            alert("O teor de argamassa informado é incompatível com esse traço.");
-            return;
-        }
 
         resultadoCimento.textContent = "Cimento: " + valorCimentoKg.toFixed(2).replace(".", ",") + " kg/m³";
 
@@ -280,10 +270,14 @@ botao.addEventListener("click", function() {
 
     const massaAreia1Kg = massaAreiaKg * percentualAreia1;
     console.log("Massa da areia 1:", massaAreia1Kg);
-        resultadoAreia1.textContent = 
+        resultadoAreia1.textContent =
         tipoAreia1.value + ": " +
-        massaAreia1Kg.toFixed(2).replace(".", ",") +
-        " kg/m³";
+        massaAreia1Kg.toFixed(2).replace(".", ",") 
+
+    resultadoAreia1.textContent = 
+    tipoAreia1.value + ": " +
+    massaAreia1Kg.toFixed(2).replace(".", ",") +
+    " kg/m³";
 
     const massaAreia2Kg = massaAreiaKg * percentualAreia2
     console.log("Massa da areia 2:", massaAreia2Kg)

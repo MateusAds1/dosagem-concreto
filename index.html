@@ -4,6 +4,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Dosagem de Concreto</title>
+
+        <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
@@ -13,22 +15,29 @@
         <section>
             <h2>Dados Do Concreto</h2>
 
-            <label>FCK desejado (MPa)</label>
-            <input
-                type="number"
-                id="fck" 
-                placeholder="Ex.: 25"
-                min="1"
-                step="1">
-            
-            <label>Abatimento (Slump) em mm</label>
-            <input
-                type="number"
-                id="slump"
-                placeholder="Ex.: 100"
-                min="0"
-                step="1">
+        <div class="linha-campos">
 
+    <div class="campo">
+        <label>FCK desejado (MPa)</label>
+        <input
+            type="number"
+            id="fck"
+            placeholder="Ex.: 25"
+            min="1"
+            step="1">
+    </div>
+
+    <div class="campo">
+        <label>Abatimento (Slump) em mm</label>
+        <input
+            type="number"
+            id="slump"
+            placeholder="Ex.: 100"
+            min="0"
+            step="1">
+    </div>
+
+</div>
             <label>Dimensão máxima da brita (mm)</label>
             <input
                 type="number"
