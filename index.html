@@ -3,166 +3,102 @@
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dosagem de Concreto</title>
-
         <link rel="stylesheet" href="style.css">
     </head>
-
     <body>
-        <h1>Dosagem De Concreto</h1>
-        <p>Calculadora para dosagem de Concreto</p>
+        <header>
+        <h1>Dosagem de Concreto</h1>
+        <p>Informe os dados abaixo para calcular o traço.</p>
+        </header>
 
-        <section>
-            <h2>Dados Do Concreto</h2>
+        <form id="formulario">
+            <fieldset>
+                <legend>Concreto</legend>
 
-        <div class="linha-campos">
+                <label for="fck">FCK (MPa)</label>
+                <input type="number" id="fck" min="20" max="40" step="0.5">
 
-    <div class="campo">
-        <label>FCK desejado (MPa)</label>
-        <input
-            type="number"
-            id="fck"
-            placeholder="Ex.: 25"
-            min="1"
-            step="1">
-    </div>
+                <label for="volume">Volume (m³)</label>
+                <input type="number" id="volume" min="0.1" step="0.1">
 
-    <div class="campo">
-        <label>Abatimento (Slump) em mm</label>
-        <input
-            type="number"
-            id="slump"
-            placeholder="Ex.: 100"
-            min="0"
-            step="1">
-    </div>
+                <label for="teorArgamassa">Teor de Argamassa (%)</label>
+                <input type="number" id="teorArgamassa" min="1" max="100" step="1">
 
-</div>
-            <label>Dimensão máxima da brita (mm)</label>
-            <input
-                type="number"
-                id="brita"
-                placeholder="Ex.: 19"
-                min=".95"
-                step="0.5">
+                <label for="slump">Abatimento / Slump (mm)</label>
+                <input type="number" id="slump" min="0"  step="1">
 
-            <label>Tipo de cimento</label>
-            <select id="cimento">
-                <option value="">Selecione o cimento</option>
-                <option value="CP V ARI RS">CP V ARI RS</option>
-                <option value="CP IV">CP IV</option>
-                <option value="CP II">CP II</option>
-            </select>
+                <label for="brita">Dimensão máxima da brita (mm)</label>
+                <select id="brita">
+                    <option value="">Selecione</option>
+                    <option value="9.5">9,5</option>
+                    <option value="19">19</option>
+                    <option value="25">25</option>
+                    <option value="32">32</option>
+                    <option value="38">38</option>
+                </select>
+            </fieldset>
 
-            <label>Massa específica do cimento (g/cm³)</label>
-            <input
-                type="number"
-                id="massaCimento"
-                placeholder="Ex.: 3,10"
-                min="1"
-                step="0.01">
+            <fieldset>
+                <legend>Cimento</legend>
 
-            <label>Massa específica da areia(g/cm³)</label>
-            <input
-                type="number"
-                id="massaAreia"
-                placeholder="Ex.: 2,65"
-                min="1"
-                step="0.01"> 
+                <label for="cimento">Tipo de cimento</label>
+                <select id="cimento">
+                    <option value="">Selecione</option>
+                    <option value="CP V ARI RS">CP V ARI RS</option>
+                    <option value="CP IV">CP IV</option>
+                    <option value="CP II">CP II</option>
+                </select>
 
-            <label>Tipo de areia 1</label>
-                <input
-                type="text"
-                id="tipoAreia1"
-                placeholder="Ex.: Areia Natural">
+                <label for="massaCimento">Massa específica (g/cm³)</label>
+                <input type="number" id="massaCimento" min="1" step="0.01">
+            </fieldset>
 
-            <label>Porcentagem da areia 1 (%)</label>
-            <input
-                type="number"
-                id="porcentagemAreia1"
-                placeholder="Ex.: 60"
-                min="0"
-                max="100"
-                step="1"> 
+            <fieldset>
+                <legend>Areias</legend>
 
-            <label>Tipo de areia 2</label>
-                <input
-                type="text"
-                id="tipoAreia2"
-                placeholder="Ex.: Areia Artificial">
-               
-            <label>Porcentagem da areia 2 (%)</label>
-            <input
-                type="number"
-                id="porcentagemAreia2"
-                placeholder="Ex.: 40"
-                min="0"
-                max="100"
-                step="1"> 
+                <label for="tipoAreia1">Areia 1</label>
+                <input type="text" id="tipoAreia1" placeholder="Ex.: Areia Natural">
 
-            <label>Massa específica da brita (g/cm³)</label>
-            <input 
-                type="number"
-                id="massaBrita"
-                placeholder="Ex.: 2,70"
-                min="1"
-                step="0.01"> 
+                <label for="porcentagemAreia1">Porcentagem da areia 1 (%)</label>
+                <input type="number" id="porcentagemAreia1" min="0" max="100" step="1">
 
-            <label>Tipo de brita 1</label>
-                <input
-                type="text"
-                id="tipoBrita1"
-                placeholder="Ex.: Brita 1">
+                <label for="tipoAreia2">Areia 2</label>
+                <input type="text" id="tipoAreia2" placeholder="Ex.: Areia Artificial">
 
-            <label>Porcentagem da brita 1 (%)</label>
-            <input
-                type="number"
-                id="porcentagemBrita1"
-                placeholder="Ex.: 60"
-                min="0"
-                max="100"
-                step="1"> 
+                <label for="porcentagemAreia2">Porcentagem da areia 2 (%)</label>
+                <input type="number" id="porcentagemAreia2" min="0" max="100" step="1">
 
-            <label>Tipo de brita 2</label>
-                <input
-                type="text"
-                id="tipoBrita2"
-                placeholder="Ex.: Brita 2">
-               
-            <label>Porcentagem da brita 2 (%)</label>
-            <input
-                type="number"
-                id="porcentagemBrita2"
-                placeholder="Ex.: 40"
-                min="0"
-                max="100"
-                step="1"> 
+                <label for="massaAreia">Massa específica da areia (g/cm³)</label>
+                <input type="number" id="massaAreia" min="1" step="0.01">
+            </fieldset>
 
-            <label>Volume de concreto (m³)</label>
-            <input
-                type="number"
-                id="volume"
-                placeholder="Ex.: 1"
-                min="0.1"
-                step="0.1">
+            <fieldset>
+                <legend>Britas</legend>
 
-            <label>Teor de argamassa (%)</label>
-            <input
-                type="number"
-                id="teorArgamassa"
-                placeholder="Ex.: 52"
-                min="1"
-                max="100"
-                step="1">
+                <label for="tipoBrita1">Brita 1</label>
+                <input type="text" id="tipoBrita1" placeholder="Ex.: Brita 1">
 
-            <button id="calcular">Calcular Dosagem</button>
+                <label for="porcentagemBrita1">Porcentagem da brita 1 (%)</label>
+                <input type="number" id="porcentagemBrita1" min="0" max="100" step="1">
 
-            <h2>Resultado da Dosagem</h2>
-            
-            <h2>Dosagem para 1 m³</h2>
+                <label for="tipoBrita2">Brita 2</label>
+                <input type="text" id="tipoBrita2" placeholder="Ex.: Brita 2">
 
-        <section>
-            <h2>Dados Principais</h2>
+                <label for="porcentagemBrita2">Porcentagem da brita 2 (%)</label>
+                <input type="number" id="porcentagemBrita2" min="0" max="100" step="1">
+
+                <label for="massaBrita">Massa específica da brita (g/cm³)</label>
+                <input type="number" id="massaBrita" min="1" step="0.01">
+            </fieldset>
+
+            <button type="submit" id="calcular">Calcular dosagem</button>
+        </form>
+
+        <section id="resultado">
+
+            <h2>Dados principais</h2>
             <p id="resultadoFCK"></p>
             <p id="resultadoAC"></p>
             <p id="resultadoCimento"></p>
@@ -180,30 +116,18 @@
 
             <h3>Traço</h3>
             <p id="resultadoTraco"></p>
-        </section>
 
             <h2>Quantidade para o volume informado</h2>
-
-        <section>
-            <h3>Cimento</h3>
             <p id="resultadoCimentoVolume"></p>
-
-            <h3>Areias</h3>
+            <p id="resultadoAguaVolume"></p>
             <p id="resultadoAreiaVolume"></p>
             <p id="resultadoAreia1Volume"></p>
             <p id="resultadoAreia2Volume"></p>
-
-            <h3>Britas</h3>
             <p id="resultadoBritaVolume"></p>
             <p id="resultadoBrita1Volume"></p>
             <p id="resultadoBrita2Volume"></p>
-
-            <h3>Água</h3>
-            <P id="resultadoAguaVolume"></P>
-        </section>
         </section>
 
         <script src="script.js"></script>
     </body>
-
 </html>
