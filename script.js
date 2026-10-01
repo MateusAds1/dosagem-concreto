@@ -2,7 +2,7 @@
 
 const botao = document.getElementById("calcular");
 const fck = document.getElementById("fck");
-const slump = document.getElementById("slump");
+const abatimento = document.getElementById("abatimento");
 const brita = document.getElementById("brita");
 const cimento = document.getElementById("cimento");
 const massaCimento = document.getElementById("massaCimento");
@@ -22,6 +22,7 @@ const resultadoFCK = document.getElementById("resultadoFCK");
 const resultadoAC = document.getElementById("resultadoAC");
 const resultadoCimento = document.getElementById("resultadoCimento");
 const resultadoAgua = document.getElementById("resultadoAgua");
+const resultado = document.getElementById("resultado");
 const resultadoAreia = document.getElementById("resultadoAreia");
 const resultadoAreia1 = document.getElementById("resultadoAreia1")
 const resultadoAreia1Volume = document.getElementById("resultadoAreia1Volume");
@@ -37,7 +38,7 @@ const resultadoBritaVolume = document.getElementById("resultadoBritaVolume");
 const resultadoBrita1Volume = document.getElementById("resultadoBrita1Volume");
 const resultadoBrita2Volume = document.getElementById("resultadoBrita2Volume");
 const resultadoAguaVolume = document.getElementById("resultadoAguaVolume");
-
+const resultadoVazios = document.getElementById("resultadoVazios");
 
 
 //  //
@@ -125,7 +126,7 @@ botao.addEventListener("click", function(evento) {
             return
         }
 
-    if (slump.value === "") {
+    if (abatimento.value === "") {
         alert("Por favor, preencha o Slump.");
         return;
     }
@@ -248,7 +249,6 @@ botao.addEventListener("click", function(evento) {
 
         const volumeAgua = valorAgua / 1000;
 
-        const volumeAgregados = 1 - volumeCimento / 1000 - volumeAgua;
     //  //
 
 // CONVERSÃO DOS VALORES PARA NÚMERO //
@@ -287,6 +287,7 @@ botao.addEventListener("click", function(evento) {
         "Total de Areia: " +
         massaAreiaKg.toFixed(2).replace(".", ",") +
         " kg/m³";
+
 
     const areiaParaVolume = massaAreiaKg * valorVolume;
         resultadoAreiaVolume.textContent = 
@@ -360,5 +361,5 @@ botao.addEventListener("click", function(evento) {
         tracoAgua.toFixed(3).replace(".",",");
     // //
     
-    
+    resultado.hidden = false;
 });
